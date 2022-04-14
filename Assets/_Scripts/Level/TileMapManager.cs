@@ -8,12 +8,18 @@ public class TileMapManager : MonoBehaviour
     [SerializeField] private GameObject character;
     [SerializeField] private float switchDelay;
     [SerializeField] private List<Tilemap> tilemaps;
+    [SerializeField] private List<GameObjectRuntimeSet> universeRuntimeSets;
     [SerializeField] private MultiverseTileLinker multiverseTileLinker;
     private Dictionary<TileBase, List<TileBase>> multiverseTileMap;
-    private bool isSwapping;
-    private List<bool> tilemapsDone;
+    public int currentUniverseIndex;
 
     private void Start()
+    {
+        Setup();
+        SwapAllTiles(currentUniverseIndex);
+    }
+
+    public void Setup()
     {
         multiverseTileMap = new Dictionary<TileBase, List<TileBase>>();
         foreach (MultiverseTileLinker.LinkedTiles linkedTiles in multiverseTileLinker.tileLinks)
@@ -30,6 +36,32 @@ public class TileMapManager : MonoBehaviour
         }
     }
 
+    private Dictionary<int, List<GameObject>> GetSizeToGameObjects(List<GameObject> gameObjects, Vector3Int startPosition, int maxSize)
+    {
+        Tilemap tilemap = tilemaps[0];
+        Dictionary<int, List<GameObject>> sizeToGameObjects = new Dictionary<int, List<GameObject>>();
+        foreach (GameObject gameObject in gameObjects)
+        {
+            Vector3Int gameObjectPosition = tilemap.WorldToCell(gameObject.transform.position);
+            Vector3Int diff = gameObjectPosition - startPosition;
+            int size = Mathf.Max(Mathf.Abs(diff.x), Mathf.Abs(diff.y));
+            if (size > maxSize)
+            {
+                size = maxSize;
+            }
+            if (sizeToGameObjects.ContainsKey(size))
+            {
+                sizeToGameObjects[size].Add(gameObject);
+            }
+            else
+            {
+                sizeToGameObjects[size] = new List<GameObject>();
+                sizeToGameObjects[size].Add(gameObject);
+            }
+        }
+        return sizeToGameObjects;
+    }
+
     void ReplaceTile(Vector3Int tilePosition, int universeIndex, Tilemap tilemap)
     {
         TileBase originalTile = tilemap.GetTile(tilePosition);
@@ -39,30 +71,92 @@ public class TileMapManager : MonoBehaviour
         }
     }
 
-    public void SwapTilesStartingAtCharacterPosition(int universeIndex)
+    public void SwapAllTiles(int universeIndex)
     {
-        foreach(Tilemap tilemap in tilemaps)
+        currentUniverseIndex = universeIndex;
+        foreach (Tilemap tilemap in tilemaps)
         {
-            Vector3Int startPosition = tilemap.WorldToCell(character.transform.position);
-            StartCoroutine(SwapTiles(startPosition, universeIndex, tilemap));
+            foreach (var position in tilemap.cellBounds.allPositionsWithin)
+            {
+                ReplaceTile(position, universeIndex, tilemap);
+            }
+        }
+        for (int i = 0; i < universeRuntimeSets.Count; i++)
+        {
+            foreach (GameObject gameObject in universeRuntimeSets[i].items)
+            {
+                if (i == universeIndex)
+                {
+                    gameObject.SetActive(true);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
+            }
         }
     }
 
-    IEnumerator SwapTiles(Vector3Int startPosition, int universeIndex, Tilemap tilemap)
+    public void SwapTilesStartingAtCharacterPosition(int universeIndex)
     {
-        BoundsInt tilemapBounds = tilemap.cellBounds;
-        List<Vector3Int> perimeterPositions;
+        StartCoroutine(SwapTiles(character.transform.position, universeIndex));
+    }
 
-        int maxX = Mathf.Max(Mathf.Abs(startPosition.x - tilemapBounds.x), Mathf.Abs(startPosition.x - tilemapBounds.xMax));
-        int maxY = Mathf.Max(Mathf.Abs(startPosition.y - tilemapBounds.y), Mathf.Abs(startPosition.y - tilemapBounds.yMax));
-        int maxSize = Mathf.Max(maxX, maxY);
-
-        for (int size = 0; size < maxSize+1; size++)
+    IEnumerator SwapTiles(Vector3 characterPosition, int universeIndex)
+    {
+        int previousUniverseIndex = currentUniverseIndex;
+        currentUniverseIndex = universeIndex;
+        if (previousUniverseIndex == currentUniverseIndex)
         {
-            perimeterPositions = GetPerimeterPositions(startPosition, size, tilemapBounds);
-            foreach (Vector3Int position in perimeterPositions)
+            yield break;
+        }
+
+        List<BoundsInt> tilemapBounds = new List<BoundsInt>();
+        List<int> maxSizes = new List<int>();
+        List<Vector3Int> startPositions = new List<Vector3Int>();
+        foreach (Tilemap tilemap in tilemaps)
+        {
+            BoundsInt bounds = tilemap.cellBounds;
+            tilemapBounds.Add(bounds);
+            Vector3Int startPosition = tilemap.WorldToCell(characterPosition);
+            startPositions.Add(startPosition);
+
+            int maxX = Mathf.Max(Mathf.Abs(startPosition.x - bounds.x), Mathf.Abs(startPosition.x - bounds.xMax));
+            int maxY = Mathf.Max(Mathf.Abs(startPosition.y - bounds.y), Mathf.Abs(startPosition.y - bounds.yMax));
+            maxSizes.Add(Mathf.Max(maxX, maxY));
+        }
+
+        int maxSize = Mathf.Max(maxSizes.ToArray());
+
+        Dictionary<int, List<GameObject>> sizeToRemoveGameObjects = GetSizeToGameObjects(universeRuntimeSets[previousUniverseIndex].items, startPositions[0], maxSize);
+        Dictionary<int, List<GameObject>> sizeToLoadGameObjects = GetSizeToGameObjects(universeRuntimeSets[currentUniverseIndex].items, startPositions[0], maxSize);
+        List<Vector3Int> perimeterPositions;
+        for (int size = 0; size < maxSize + 1; size++)
+        {
+            for (int tilemapIndex = 0; tilemapIndex < tilemaps.Count; tilemapIndex++)
             {
-                ReplaceTile(position, universeIndex, tilemap);
+                if (size <= maxSizes[tilemapIndex])
+                {
+                    perimeterPositions = GetPerimeterPositions(startPositions[tilemapIndex], size, tilemapBounds[tilemapIndex]);
+                    foreach (Vector3Int position in perimeterPositions)
+                    {
+                        ReplaceTile(position, universeIndex, tilemaps[tilemapIndex]);
+                    }
+                }
+            }
+            if (sizeToRemoveGameObjects.ContainsKey(size))
+            {
+                foreach (GameObject gameObject in sizeToRemoveGameObjects[size])
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+            if (sizeToLoadGameObjects.ContainsKey(size))
+            {
+                foreach (GameObject gameObject in sizeToLoadGameObjects[size])
+                {
+                    gameObject.SetActive(true);
+                }
             }
             yield return new WaitForSeconds(switchDelay);
         }
