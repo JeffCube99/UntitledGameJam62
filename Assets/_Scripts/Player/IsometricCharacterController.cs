@@ -7,7 +7,7 @@ public class IsometricCharacterController : MonoBehaviour
 {
     public float speed;
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
-
+    [SerializeField] private Animator characterAnimator;
     private Rigidbody2D characterRigidbody2D;
     private Vector3 acceleration = Vector3.zero;
     private float horizontalInput;
@@ -16,13 +16,23 @@ public class IsometricCharacterController : MonoBehaviour
     private void Start()
     {
         characterRigidbody2D = GetComponent<Rigidbody2D>();
+        characterAnimator = GetComponent<Animator>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         Vector3 direction = context.ReadValue<Vector2>();
+        if (direction.x != horizontalInput || direction.y != verticalInput)
+        {
+            characterAnimator.SetFloat("last_x", horizontalInput);
+            characterAnimator.SetFloat("last_y", verticalInput);
+        }
         horizontalInput = direction.x;
         verticalInput = direction.y;
+        characterAnimator.SetFloat("velocity_x", direction.x);
+        characterAnimator.SetFloat("velocity_y", direction.y);
+        characterAnimator.SetFloat("speed", direction.magnitude);
+
     }
 
     private void FixedUpdate()

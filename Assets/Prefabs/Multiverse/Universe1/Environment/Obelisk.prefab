@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8424727227320565735}
   - component: {fileID: 3463166154048161964}
   - component: {fileID: 2008332447545371875}
+  - component: {fileID: 927702823765887763}
   m_Layer: 0
   m_Name: Obelisk
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &2008332447545371875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,3 +97,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runtimeSet: {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
+--- !u!70 &927702823765887763
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482230197962326707}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.011307035, y: 0.26788858}
+  m_Size: {x: 0.7449589, y: 0.37749332}
+  m_Direction: 1
