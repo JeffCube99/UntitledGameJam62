@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  switchDelay: 0.01
+  switchDelay: 0.05
   tilemaps:
   - {fileID: 0}
   - {fileID: 0}
