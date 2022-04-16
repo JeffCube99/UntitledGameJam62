@@ -5,18 +5,23 @@ using UnityEngine.Tilemaps;
 
 public class TileMapManager : MonoBehaviour
 {
-    [SerializeField] private GameObject character;
+    [SerializeField] private GameObjectRuntimeSet playerRuntimeSet;
     [SerializeField] private float switchDelay;
     [SerializeField] private List<Tilemap> tilemaps;
     [SerializeField] private List<GameObjectRuntimeSet> universeRuntimeSets;
     [SerializeField] private MultiverseTileLinker multiverseTileLinker;
+    [SerializeField] private GameState gameState;
     private Dictionary<TileBase, List<TileBase>> multiverseTileMap;
-    public int currentUniverseIndex;
+    private int currentUniverseIndex;
 
-    private void Start()
+    private void Awake()
     {
         Setup();
-        SwapAllTiles(currentUniverseIndex);
+    }
+
+    public void OnPlayerRespawn()
+    {
+        SwapAllTiles(gameState.checkpointData.universeIndex);
     }
 
     public void Setup()
@@ -99,7 +104,7 @@ public class TileMapManager : MonoBehaviour
 
     public void SwapTilesStartingAtCharacterPosition(int universeIndex)
     {
-        StartCoroutine(SwapTiles(character.transform.position, universeIndex));
+        StartCoroutine(SwapTiles(playerRuntimeSet.items[0].transform.position, universeIndex));
     }
 
     IEnumerator SwapTiles(Vector3 characterPosition, int universeIndex)

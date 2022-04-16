@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1253260799434881108}
   - component: {fileID: 1253260799434881111}
   - component: {fileID: 1253260799434881098}
+  - component: {fileID: 6616618035472516575}
   m_Layer: 0
   m_Name: TileMapManager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e2f3761d30c584fb790fab5f689f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  playerRuntimeSet: {fileID: 11400000, guid: a47d453572fd797428c92c2a5cb78d38, type: 2}
   switchDelay: 0.05
   tilemaps:
   - {fileID: 0}
@@ -54,7 +55,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74e9b131b42656849aa2ae358b4072c0, type: 2}
   - {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
   multiverseTileLinker: {fileID: 11400000, guid: 66aa63ede0beb9f42a762066712c3c75, type: 2}
-  currentUniverseIndex: 0
+  gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
 --- !u!114 &1253260799434881111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +108,34 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6616618035472516575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253260799434881110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fefb83fc4a1c6642b5f551f0452d2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 266ba0473bb24d9458df45c0450e5cd5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1253260799434881108}
+        m_TargetAssemblyTypeName: TileMapManager, Assembly-CSharp
+        m_MethodName: OnPlayerRespawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

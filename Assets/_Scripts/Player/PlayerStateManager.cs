@@ -9,8 +9,14 @@ public class PlayerStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerState.health = playerState.maxHealth;   
-        playerState.isInvincible = false;   
+        ResetPlayer();
+    }
+
+    public void ResetPlayer()
+    {
+        playerState.health = playerState.maxHealth;
+        playerState.isInvincible = false;
+        playerState.isDead = false;
     }
 
 }

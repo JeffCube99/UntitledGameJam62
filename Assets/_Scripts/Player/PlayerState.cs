@@ -20,18 +20,27 @@ public class PlayerState : ScriptableObject
     }
     public int maxHealth = 4;
     public bool isInvincible = false;
+    public bool isDead = false;
     
     public void TakeDamage(int damage)
     {
-        if (!isInvincible)
+        if (!isInvincible && !isDead)
         {
             health -= damage;
             OnDamageTaken.Invoke();
+            if (health <= 0)
+            {
+                isDead = true;
+                OnDeath.Invoke();
+            }
         }
     }
 
+    public float damagedInvincibilityDuration;
+
     public UnityEvent OnHealthChanged;
     public UnityEvent OnDamageTaken;
+    public UnityEvent OnDeath;
 
 
 }

@@ -20,11 +20,6 @@ public class PlayerTakeDamageComponent : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        
-    }
-
     private void HandleHazardCollision(Collider2D other)
     {
         HazardComponent otherHazard = other.gameObject.GetComponent<HazardComponent>();
@@ -48,29 +43,11 @@ public class PlayerTakeDamageComponent : MonoBehaviour
         }
     }
 
-    private void ShowRegularForm()
-    {
-        playerSpriteRenderer.color = regularColor;
-    }
-
-    private void ShowDamagedForm()
-    {
-        playerSpriteRenderer.color = damagedColor;
-    }
-
     IEnumerator DamageEffect()
     {
         playerState.isInvincible = true;
         playerDamageCollider.enabled = false;
-        float timePassed = 0;
-        while (timePassed < damageEffectDuration)
-        {
-            ShowDamagedForm();
-            yield return new WaitForSeconds(timeBetweenDamageFlashes);
-            ShowRegularForm();
-            yield return new WaitForSeconds(timeBetweenDamageFlashes);
-            timePassed += timeBetweenDamageFlashes * 2;
-        }
+        yield return new WaitForSeconds(damageEffectDuration);
         playerState.isInvincible = false;
         playerDamageCollider.enabled = true;
     }
