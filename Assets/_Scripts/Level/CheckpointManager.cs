@@ -9,7 +9,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private GameObject checkpointText;
     [SerializeField] private TextMesh checkpointTextMesh;
     [SerializeField] private int universeIndex;
-    private bool playerIsNear;
+    private int playerInCounter;
     private CheckpointData checkpointData;
 
     private void Start()
@@ -21,7 +21,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void SetCheckpoint()
     {
-        if (playerIsNear)
+        if (playerInCounter >= 1)
         {
             gameState.checkpointData = checkpointData;
             DisplayText("Progress Saved!");
@@ -38,8 +38,11 @@ public class CheckpointManager : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            playerIsNear = true;
-            DisplayText("Press [e]\nTo Save");
+            playerInCounter += 1;
+            if (playerInCounter == 1)
+            {
+                DisplayText("Press [e]\nTo Save");
+            }
         }
     }
 
@@ -47,8 +50,11 @@ public class CheckpointManager : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            playerIsNear = false;
-            checkpointText.SetActive(false);
+            playerInCounter -= 1;
+            if (playerInCounter < 1)
+            {
+                checkpointText.SetActive(false);
+            }
         }
     }
 }

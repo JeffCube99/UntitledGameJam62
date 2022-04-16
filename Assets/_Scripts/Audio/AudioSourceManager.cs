@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AudioSourceManager", menuName = "ScriptableObjects/Audio/AudioSourceManager")]
 public class AudioSourceManager : ScriptableObject
 {
-    public ObjectPool audioSourceObjectPool;
+    public ObjectPool audioSource3DObjectPool;
     public int maxAudioSources2D;
     public GameObject musicAudioSourcePrefab;
 
@@ -43,7 +42,7 @@ public class AudioSourceManager : ScriptableObject
         if (audioSources2D == null)
         {
             audioSources2D = new Queue<AudioSource>();
-        }    
+        }
         else
         {
             foreach (AudioSource queueSource in audioSources2D)
@@ -87,7 +86,7 @@ public class AudioSourceManager : ScriptableObject
 
     public AudioSource Get3DAudioSourceAtLocation(Transform location)
     {
-        GameObject audioSourceObject = audioSourceObjectPool.Instantiate(location.position, location.rotation);
+        GameObject audioSourceObject = audioSource3DObjectPool.Instantiate(location.position, location.rotation);
         AudioSource audioSource = audioSourceObject.GetComponent<AudioSource>();
         return audioSource;
     }
