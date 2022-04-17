@@ -656,7 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
-  travelDelay: 1
+  travelDelay: 0.5
   OnUniverseTravelBegin:
     m_PersistentCalls:
       m_Calls:

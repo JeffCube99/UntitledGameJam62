@@ -47,6 +47,11 @@ public class Weapon : MonoBehaviour
     private void SpawnProjectile()
     {
         GameObject projectile = projectileObjectPool.Instantiate(projectileSpawnTransform.position, projectileSpawnTransform.rotation);
+        ProjectileController projectileController = projectile.GetComponent<ProjectileController>();
+        if (projectileController != null)
+        {
+            projectileController.OnSpawn();
+        }
     }
 
 }
