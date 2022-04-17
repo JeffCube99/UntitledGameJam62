@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform projectileSpawnTransform;
     private bool isFiring;
     private bool weaponIsActive;
+
+    public UnityEvent OnWeaponFire;
 
     public void OnEnable()
     {
@@ -39,6 +42,7 @@ public class Weapon : MonoBehaviour
         while (isFiring)
         {
             SpawnProjectile();
+            OnWeaponFire.Invoke();
             yield return new WaitForSeconds(timeBetweenShots);
         }
         weaponIsActive = false;
