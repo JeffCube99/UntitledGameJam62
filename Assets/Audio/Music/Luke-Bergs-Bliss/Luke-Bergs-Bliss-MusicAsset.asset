@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7524b5f7dddb2b42bff6ed14458fefe, type: 3}
   m_Name: Luke-Bergs-Bliss-MusicAsset
   m_EditorClassIdentifier: 
-  audioSourcePreset: {fileID: 2655988077585873504, guid: 38a56325aa8287e4eb3974dc76e73716, type: 2}
+  audioClip: {fileID: 8300000, guid: 982ff6adc7b0a6f4dbafc2c1364b049b, type: 3}
+  volume: 1
+  audioMixerGroup: {fileID: -2632397910726762342, guid: 952ded2a5efc1064aaf9a186060d5860, type: 2}
   audioSourceManager: {fileID: 11400000, guid: ae6164aac02ad06418d3e26a975a7c6b, type: 2}
