@@ -10,10 +10,12 @@ public class GameState : ScriptableObject
     [SerializeField] private ObjectPool playerObjectPool;
     public CheckpointData checkpointData;
     public UnityEvent OnPlayerRespawn;
+    public int currentUniverseIndex;
 
     public void respawnPlayer()
     {
         playerObjectPool.Instantiate(checkpointData.spawnPosition, Quaternion.identity);
+        currentUniverseIndex = checkpointData.universeIndex;
         OnPlayerRespawn.Invoke();
     }
 }

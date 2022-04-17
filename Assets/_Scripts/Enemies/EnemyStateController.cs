@@ -3,46 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "New PlayerState", menuName = "ScriptableObjects/States/PlayerState")]
-public class PlayerState : ScriptableObject
+public class EnemyStateController : MonoBehaviour
 {
+    public int maxHealth;
+    private List<Collider2D> colliders;
     [SerializeField] private int _health;
     public int health
     {
         get { return _health; }
         set
         {
-            if (_health == value) 
+            if (_health == value)
                 return;
             _health = Mathf.Clamp(value, 0, maxHealth);
             OnHealthChanged.Invoke();
         }
     }
-    public int maxHealth = 4;
-    public bool isInvincible = false;
-    public bool isDead = false;
-    public bool isTraveling = false;
-    public List<int> universeCrystals;
-    
+
+    public bool isDead;
+
+    private void Start()
+    {
+        colliders = new List<Collider2D>(GetComponents<Collider2D>());
+        Respawn();
+    }
+
+    public void Respawn()
+    {
+        health = maxHealth;
+        foreach (Collider2D collider in colliders)
+            collider.enabled = true;
+        OnRespawn.Invoke();
+    }
+
     public void TakeDamage(int damage)
     {
-        if (!isInvincible && !isDead)
+        if (!isDead)
         {
             health -= damage;
             OnDamageTaken.Invoke();
             if (health <= 0)
             {
                 isDead = true;
+                foreach (Collider2D collider in colliders)
+                    collider.enabled = false;
                 OnDeath.Invoke();
             }
         }
     }
 
-    public float damagedInvincibilityDuration;
-
-    public UnityEvent OnHealthChanged;
     public UnityEvent OnDamageTaken;
+    public UnityEvent OnHealthChanged;
     public UnityEvent OnDeath;
-
-
+    public UnityEvent OnRespawn;
 }

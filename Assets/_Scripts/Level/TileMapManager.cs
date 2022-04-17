@@ -12,7 +12,7 @@ public class TileMapManager : MonoBehaviour
     [SerializeField] private MultiverseTileLinker multiverseTileLinker;
     [SerializeField] private GameState gameState;
     private Dictionary<TileBase, List<TileBase>> multiverseTileMap;
-    private int currentUniverseIndex;
+    private int previousUniverseIndex;
 
     private void Awake()
     {
@@ -78,7 +78,6 @@ public class TileMapManager : MonoBehaviour
 
     public void SwapAllTiles(int universeIndex)
     {
-        currentUniverseIndex = universeIndex;
         foreach (Tilemap tilemap in tilemaps)
         {
             foreach (var position in tilemap.cellBounds.allPositionsWithin)
@@ -100,6 +99,7 @@ public class TileMapManager : MonoBehaviour
                 }
             }
         }
+        previousUniverseIndex = universeIndex;
     }
 
     public void SwapTilesStartingAtCharacterPosition(int universeIndex)
@@ -109,13 +109,6 @@ public class TileMapManager : MonoBehaviour
 
     IEnumerator SwapTiles(Vector3 characterPosition, int universeIndex)
     {
-        int previousUniverseIndex = currentUniverseIndex;
-        currentUniverseIndex = universeIndex;
-        if (previousUniverseIndex == currentUniverseIndex)
-        {
-            yield break;
-        }
-
         List<BoundsInt> tilemapBounds = new List<BoundsInt>();
         List<int> maxSizes = new List<int>();
         List<Vector3Int> startPositions = new List<Vector3Int>();
@@ -134,7 +127,7 @@ public class TileMapManager : MonoBehaviour
         int maxSize = Mathf.Max(maxSizes.ToArray());
 
         Dictionary<int, List<GameObject>> sizeToRemoveGameObjects = GetSizeToGameObjects(universeRuntimeSets[previousUniverseIndex].items, startPositions[0], maxSize);
-        Dictionary<int, List<GameObject>> sizeToLoadGameObjects = GetSizeToGameObjects(universeRuntimeSets[currentUniverseIndex].items, startPositions[0], maxSize);
+        Dictionary<int, List<GameObject>> sizeToLoadGameObjects = GetSizeToGameObjects(universeRuntimeSets[universeIndex].items, startPositions[0], maxSize);
         List<Vector3Int> perimeterPositions;
         for (int size = 0; size < maxSize + 1; size++)
         {
@@ -165,6 +158,7 @@ public class TileMapManager : MonoBehaviour
             }
             yield return new WaitForSeconds(switchDelay);
         }
+        previousUniverseIndex = universeIndex;
     }
 
     public List<Vector3Int> GetPerimeterPositions(Vector3Int center, int size, BoundsInt tilemapBounds)

@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 706777414}
   m_Layer: 0
   m_Name: Wall1Tilemap
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15355,8 +15355,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
-  initialSpawnPoint: {fileID: 248951568}
-  initialUniverseIndex: 0
+  initialCheckpoint:
+    spawnPosition: {x: 2.67, y: 1.88, z: 0}
+    universeIndex: 0
+    playerUniverseCrystals: 0000000001000000
 --- !u!4 &2091900335
 Transform:
   m_ObjectHideFlags: 0
