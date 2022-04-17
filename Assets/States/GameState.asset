@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   playerObjectPool: {fileID: 11400000, guid: c6e3d0e421a747247805bb76fb22573b, type: 2}
-  lastCheckpoint: {fileID: 0}
+  universeRuntimeSets:
+  - {fileID: 11400000, guid: 74e9b131b42656849aa2ae358b4072c0, type: 2}
+  - {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
+  checkpointData:
+    spawnPosition: {x: -3.879, y: 2.214, z: 0}
+    universeIndex: 1
+    playerUniverseCrystals: 0000000001000000
   OnPlayerRespawn:
     m_PersistentCalls:
       m_Calls:
@@ -29,3 +35,4 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  currentUniverseIndex: 0

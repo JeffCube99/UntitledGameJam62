@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7961286499153618738}
   - component: {fileID: 3047008147182420477}
   m_Layer: 0
-  m_Name: DesertEnemy
+  m_Name: RockEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.9372549, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b890a240dd04fe40bfcebc6aecfc49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runtimeSet: {fileID: 11400000, guid: 74e9b131b42656849aa2ae358b4072c0, type: 2}
+  runtimeSet: {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
 --- !u!114 &5751125662454771564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   timeBetweenDamageFlashes: 0.2
   damageEffectDuration: 1
   damagedColor: {r: 1, g: 0.495283, b: 0.90103596, a: 1}
-  regularColor: {r: 1, g: 0, b: 0, a: 1}
+  regularColor: {r: 0, g: 1, b: 0.9374714, a: 1}
   deadColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
 --- !u!114 &7961286499153618738
 MonoBehaviour:

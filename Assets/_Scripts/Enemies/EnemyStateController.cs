@@ -31,6 +31,7 @@ public class EnemyStateController : MonoBehaviour
     public void Respawn()
     {
         health = maxHealth;
+        isDead = false;
         foreach (Collider2D collider in colliders)
             collider.enabled = true;
         OnRespawn.Invoke();
