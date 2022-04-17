@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private GameObject respawnPoint;
     [SerializeField] private GameObject checkpointText;
-    [SerializeField] private TextMesh checkpointTextMesh;
+    [SerializeField] private TextMeshPro checkpointTextMesh;
     [SerializeField] private int universeIndex;
     private int playerInCounter;
 
