@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7524b5f7dddb2b42bff6ed14458fefe, type: 3}
   m_Name: OnClickButtonSoundAsset
   m_EditorClassIdentifier: 
-  audioSourcePreset: {fileID: 2655988077585873504, guid: 225d225bef423d640b2705adfa4e19f6, type: 2}
+  audioClip: {fileID: 8300000, guid: b5c5dc964c6d4ca4b81dfd7b4d220448, type: 3}
+  volume: 1
+  audioMixerGroup: {fileID: 7776635594807739044, guid: 952ded2a5efc1064aaf9a186060d5860, type: 2}
   audioSourceManager: {fileID: 11400000, guid: ae6164aac02ad06418d3e26a975a7c6b, type: 2}
