@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private TextMeshPro checkpointTextMesh;
     [SerializeField] private int universeIndex;
     private int playerInCounter;
+    public UnityEvent OnProgressSaved;
 
 
     private CheckpointData GenerateCheckpointData()
@@ -29,6 +31,7 @@ public class CheckpointManager : MonoBehaviour
         {
             gameState.checkpointData = GenerateCheckpointData();
             DisplayText("Progress Saved!");
+            OnProgressSaved.Invoke();
         }
     }
 

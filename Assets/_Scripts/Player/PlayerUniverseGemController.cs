@@ -8,6 +8,9 @@ public class PlayerUniverseGemController : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private GameState gameState;
     public float travelDelay;
+    [SerializeField] private ObjectPool travelChargeParticlesObjectPool;
+    [SerializeField] private ObjectPool travelSuccessParticlesObjectPool;
+
 
     public UnityEvent OnUniverseTravelBegin;
     public UnityEvent<int> OnUniverseTravelSuccess;
@@ -32,7 +35,11 @@ public class PlayerUniverseGemController : MonoBehaviour
     IEnumerator Travel(int universeIndex)
     {
         OnUniverseTravelBegin.Invoke();
+        if (travelChargeParticlesObjectPool != null)
+            travelChargeParticlesObjectPool.Instantiate(transform.position, transform.rotation);
         yield return new WaitForSeconds(travelDelay);
+        if (travelSuccessParticlesObjectPool != null)
+            travelSuccessParticlesObjectPool.Instantiate(transform.position, transform.rotation);
         gameState.currentUniverseIndex = universeIndex;
         OnUniverseTravelSuccess.Invoke(universeIndex);
         playerState.isTraveling = false;

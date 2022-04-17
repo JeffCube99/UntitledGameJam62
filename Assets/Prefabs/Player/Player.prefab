@@ -53,6 +53,21 @@ MonoBehaviour:
   timeBetweenShots: 0.5
   fireDelay: 0
   projectileSpawnTransform: {fileID: 2608075857638550445}
+  OnWeaponFire:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1405a6021ce9376459e667f2d6e8bacc, type: 2}
+        m_TargetAssemblyTypeName: SoundAsset, Assembly-CSharp
+        m_MethodName: PlayAudioAtAudioListener
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7342326267388113558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +319,8 @@ GameObject:
   - component: {fileID: 5111783370175065367}
   - component: {fileID: 16915316700715729}
   - component: {fileID: 2022846885445442345}
+  - component: {fileID: 9184739323946836766}
+  - component: {fileID: 7044245194663375312}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -525,7 +542,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
-  travelDelay: 0.5
+  travelDelay: 2
+  travelChargeParticlesObjectPool: {fileID: 11400000, guid: 40c3d8b2974eddf44b34d1f9d3bdc288, type: 2}
+  travelSuccessParticlesObjectPool: {fileID: 11400000, guid: 64404e96af13db6448ebd541a5dd5fb0, type: 2}
   OnUniverseTravelBegin:
     m_PersistentCalls:
       m_Calls:
@@ -541,12 +560,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 3c02343fd03afd24aa59dc2c8d2b6d47, type: 2}
+        m_TargetAssemblyTypeName: SoundAsset, Assembly-CSharp
+        m_MethodName: PlayAudioAtAudioListener
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnUniverseTravelSuccess:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 01a99de89e9590f4f833028c68b4b9dd, type: 2}
         m_TargetAssemblyTypeName: GenericGameEvent`1[[System.Int32, mscorlib
         m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7044245194663375312}
+        m_TargetAssemblyTypeName: UniverseTravelSoundController, Assembly-CSharp
+        m_MethodName: OnSuccessfulTravel
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -801,6 +844,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!81 &9184739323946836766
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153485808585370673}
+  m_Enabled: 1
+--- !u!114 &7044245194663375312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153485808585370673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4f12a4bc036bf438970efad8c481f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  universeTravelSoundAssets:
+  - {fileID: 11400000, guid: 3dbb0860a75708c4aa5561fb54ea91c0, type: 2}
+  - {fileID: 11400000, guid: dbbe46c5495573e45b0551bfc94ff61b, type: 2}
 --- !u!1 &6538023776253186206
 GameObject:
   m_ObjectHideFlags: 0
