@@ -12,8 +12,19 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState.checkpointData = initialCheckpoint;
+        gameState.gameIsPaused = false;
         gameState.respawnPlayer();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         virtualCamera.Follow = player.transform;
+    }
+
+    public void PauseGame()
+    {
+        gameState.PauseGame();
+    }
+
+    public void ResumeGame()
+    {
+        gameState.ResumeGame();
     }
 }

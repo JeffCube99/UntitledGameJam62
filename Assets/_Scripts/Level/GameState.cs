@@ -11,8 +11,32 @@ public class GameState : ScriptableObject
     [SerializeField] private List<GameObjectRuntimeSet> universeRuntimeSets;
 
     public CheckpointData checkpointData;
-    public UnityEvent OnPlayerRespawn;
     public int currentUniverseIndex;
+    public bool gameIsPaused;
+
+    public UnityEvent OnPlayerRespawn;
+    public UnityEvent OnGamePause;
+    public UnityEvent OnGameResume;
+
+    public void PauseGame()
+    {
+        if (!gameIsPaused)
+        {
+            gameIsPaused = true;
+            Time.timeScale = 0;
+            OnGamePause.Invoke();
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (gameIsPaused)
+        {
+            gameIsPaused = false;
+            Time.timeScale = 1;
+            OnGameResume.Invoke();
+        }
+    }
 
     public void respawnPlayer()
     {

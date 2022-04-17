@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileObjectPool: {fileID: 11400000, guid: 9ed2bd6e43e10974598f282fd63f112b, type: 2}
-  timeBetweenShots: 1
+  timeBetweenShots: 0.5
   fireDelay: 0
   projectileSpawnTransform: {fileID: 2608075857638550445}
 --- !u!114 &7342326267388113558
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
+  gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
   playerWeapon: {fileID: 3554279060480653905}
 --- !u!114 &6350759274767331309
 MonoBehaviour:
@@ -294,11 +295,11 @@ GameObject:
   - component: {fileID: 2474454418278901899}
   - component: {fileID: 5290942010005940763}
   - component: {fileID: 788225419}
+  - component: {fileID: 7611904824882783574}
   - component: {fileID: 4522806070944440776}
   - component: {fileID: 6128632380267497856}
   - component: {fileID: 3050117988980760002}
   - component: {fileID: 3005663825039321046}
-  - component: {fileID: 7611904824882783574}
   - component: {fileID: 6153485808585370672}
   - component: {fileID: 5111783370175065367}
   - component: {fileID: 16915316700715729}
@@ -510,6 +511,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
+--- !u!114 &7611904824882783574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153485808585370673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d0f5bca78a8df439703d7dc102da4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
+  gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
+  travelDelay: 0.5
+  OnUniverseTravelBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: bef09e8d4662b50408acdf6dce8cfb0a, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnUniverseTravelSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 01a99de89e9590f4f833028c68b4b9dd, type: 2}
+        m_TargetAssemblyTypeName: GenericGameEvent`1[[System.Int32, mscorlib
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4522806070944440776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,51 +689,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runtimeSet: {fileID: 11400000, guid: a47d453572fd797428c92c2a5cb78d38, type: 2}
---- !u!114 &7611904824882783574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6153485808585370673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d0f5bca78a8df439703d7dc102da4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
-  gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
-  travelDelay: 0.5
-  OnUniverseTravelBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: bef09e8d4662b50408acdf6dce8cfb0a, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnUniverseTravelSuccess:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 01a99de89e9590f4f833028c68b4b9dd, type: 2}
-        m_TargetAssemblyTypeName: GenericGameEvent`1[[System.Int32, mscorlib
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6153485808585370672
 MonoBehaviour:
   m_ObjectHideFlags: 0

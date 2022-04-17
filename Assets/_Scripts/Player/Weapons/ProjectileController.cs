@@ -6,10 +6,13 @@ public class ProjectileController : MonoBehaviour
 {
     [SerializeField] private List<GameObjectRuntimeSet> universeRuntimeSets;
     [SerializeField] private GameState gameState;
+    [SerializeField] private ObjectPool onDestroyParticlesObjectPool;
     private int previousRuntimeSet;
     public void DestroyProjectile()
     {
         gameObject.SetActive(false);
+        if (onDestroyParticlesObjectPool != null)
+            onDestroyParticlesObjectPool.Instantiate(transform.position, transform.rotation);
     }
 
     public void OnSpawn()
