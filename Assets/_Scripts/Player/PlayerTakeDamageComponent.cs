@@ -31,10 +31,13 @@ public class PlayerTakeDamageComponent : MonoBehaviour
 
     private void StartDamageEffect()
     {
-        StopAllCoroutines();
-        if (gameObject.activeInHierarchy)
+        if (!playerState.isDead)
         {
-            StartCoroutine(DamageEffect());
+            StopAllCoroutines();
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(DamageEffect());
+            }
         }
     }
 

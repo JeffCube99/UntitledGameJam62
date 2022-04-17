@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerWeaponController : MonoBehaviour
 {
     [SerializeField] private PlayerState playerState;
+    [SerializeField] private GameState gameState;
     [SerializeField] private Weapon playerWeapon;
 
     public void StartFiringPlayerWeapon()
     {
-        if (!playerState.isDead && !playerState.isTraveling)
+        if (!playerState.isDead && !playerState.isTraveling && !gameState.gameIsPaused)
             playerWeapon.Fire();
     }
 

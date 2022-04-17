@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3463166154048161964}
   - component: {fileID: 2008332447545371875}
   - component: {fileID: 927702823765887763}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obelisk
   m_TagString: Environment
   m_Icon: {fileID: 0}

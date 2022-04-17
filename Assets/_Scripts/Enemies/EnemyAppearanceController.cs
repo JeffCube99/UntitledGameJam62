@@ -5,41 +5,48 @@ using UnityEngine;
 public class EnemyAppearanceController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer enemySpriteRenderer;
+    [SerializeField] private Animator enemyAnimator;
     [SerializeField] private float timeBetweenDamageFlashes;
     [SerializeField] private float damageEffectDuration;
     [SerializeField] private Color damagedColor;
     [SerializeField] private Color regularColor;
     [SerializeField] private Color deadColor;
+    private Vector2 lastPosition;
 
     private void FixedUpdate()
     {
-        //SetAnimatorMovementVariables(Vector2 direction);
+        if (enemyAnimator != null)
+        {
+            Vector2 direction = (Vector2)transform.position - lastPosition;
+            lastPosition = (Vector2)transform.position;
+            SetAnimatorMovementVariables(direction);
+        }
     }
 
     private void SetAnimatorMovementVariables(Vector2 direction)
     {
-        //if (direction.x != lastHorizontalInput || direction.y != lastVerticalInput)
-        //{
-        //    characterAnimator.SetFloat("last_x", lastHorizontalInput);
-        //    characterAnimator.SetFloat("last_y", lastVerticalInput);
-        //}
-        //lastHorizontalInput = direction.x;
-        //lastVerticalInput = direction.y;
-        //characterAnimator.SetFloat("velocity_x", direction.x);
-        //characterAnimator.SetFloat("velocity_y", direction.y);
-        //characterAnimator.SetFloat("speed", direction.magnitude);
+        if (direction.x < 0)
+        {
+            enemyAnimator.SetFloat("velocity_x", 1);
+        }
+        else
+        {
+            enemyAnimator.SetFloat("velocity_x", -1);
+        }
     }
 
     public void OnRespawn()
     {
+        enemySpriteRenderer.sortingOrder = 0;
         StopAllCoroutines();
         ShowRegularForm();
     }
 
     public void OnDeath()
     {
-        // characterAnimator.SetBool("isDead", true);
-        // SetAnimatorMovementVariables(Vector2.zero);
+        enemySpriteRenderer.sortingOrder = -1;
+        if (enemyAnimator != null)
+            enemyAnimator.SetBool("is_dead", true);
         StopAllCoroutines();
         ShowDeadForm();
     }

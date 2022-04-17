@@ -17,9 +17,14 @@ public class IsometricCharacterController : MonoBehaviour
         characterRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    private bool CanMove()
+    {
+        return !playerState.isDead && !playerState.isTraveling;
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
-        if (!playerState.isDead)
+        if (CanMove())
         {
             targetDirection = context.ReadValue<Vector2>();
         }

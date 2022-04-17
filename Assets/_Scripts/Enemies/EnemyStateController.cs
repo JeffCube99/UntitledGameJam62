@@ -6,7 +6,9 @@ using UnityEngine.Events;
 public class EnemyStateController : MonoBehaviour
 {
     public int maxHealth;
-    private List<Collider2D> colliders;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    [SerializeField] private List<Collider2D> colliders;
     [SerializeField] private int _health;
     public int health
     {
@@ -24,7 +26,8 @@ public class EnemyStateController : MonoBehaviour
 
     private void Start()
     {
-        colliders = new List<Collider2D>(GetComponents<Collider2D>());
+        initialPosition = gameObject.transform.position;
+        initialRotation = gameObject.transform.rotation;
         Respawn();
     }
 
@@ -32,6 +35,8 @@ public class EnemyStateController : MonoBehaviour
     {
         health = maxHealth;
         isDead = false;
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
         foreach (Collider2D collider in colliders)
             collider.enabled = true;
         OnRespawn.Invoke();
