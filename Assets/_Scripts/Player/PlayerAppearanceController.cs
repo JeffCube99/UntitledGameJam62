@@ -14,27 +14,30 @@ public class PlayerAppearanceController : MonoBehaviour
     [SerializeField] private Color damagedColor;
     [SerializeField] private Color regularColor;
     [SerializeField] private Color deadColor;
+    private Rigidbody2D playerRigidbody;
 
-    public void OnMoveInput(InputAction.CallbackContext context)
+    private void Start()
     {
-        if (!playerState.isDead)
-        {
-            Vector2 direction = context.ReadValue<Vector2>();
-            SetAnimatorMovementVariables(direction);
-        }
+        playerRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        SetAnimatorMovementVariables(playerRigidbody.velocity);
     }
 
     private void SetAnimatorMovementVariables(Vector2 direction)
     {
-        if (direction.x != lastHorizontalInput || direction.y != lastVerticalInput)
+        Vector2 normalizedDirection = direction.normalized;
+        if (direction.magnitude > 0.1f)
         {
+            lastHorizontalInput = normalizedDirection.x;
+            lastVerticalInput = normalizedDirection.y;
             characterAnimator.SetFloat("last_x", lastHorizontalInput);
             characterAnimator.SetFloat("last_y", lastVerticalInput);
         }
-        lastHorizontalInput = direction.x;
-        lastVerticalInput = direction.y;
-        characterAnimator.SetFloat("velocity_x", direction.x);
-        characterAnimator.SetFloat("velocity_y", direction.y);
+        characterAnimator.SetFloat("velocity_x", normalizedDirection.x);
+        characterAnimator.SetFloat("velocity_y", normalizedDirection.y);
         characterAnimator.SetFloat("speed", direction.magnitude);
     }
 
