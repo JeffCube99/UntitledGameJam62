@@ -5,11 +5,6 @@ using UnityEngine;
 public class PlayerTakeDamageComponent : MonoBehaviour
 {
     public PlayerState playerState;
-    [SerializeField] private float damageEffectDuration;
-    [SerializeField] private float timeBetweenDamageFlashes;
-    [SerializeField] private SpriteRenderer playerSpriteRenderer;
-    [SerializeField] private Color damagedColor;
-    [SerializeField] private Color regularColor;
     [SerializeField] private CapsuleCollider2D playerDamageCollider;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,9 +18,9 @@ public class PlayerTakeDamageComponent : MonoBehaviour
     private void HandleHazardCollision(Collider2D other)
     {
         HazardComponent otherHazard = other.gameObject.GetComponent<HazardComponent>();
-        if (otherHazard != null)
+        if (otherHazard != null && otherHazard.hazard.harmsPlayer)
         {
-            playerState.TakeDamage(otherHazard.hazard.playerDamage);
+            playerState.TakeDamage(otherHazard.hazard.damage);
         }
     }
 
@@ -47,7 +42,7 @@ public class PlayerTakeDamageComponent : MonoBehaviour
     {
         playerState.isInvincible = true;
         playerDamageCollider.enabled = false;
-        yield return new WaitForSeconds(damageEffectDuration);
+        yield return new WaitForSeconds(playerState.damagedInvincibilityDuration);
         playerState.isInvincible = false;
         playerDamageCollider.enabled = true;
     }

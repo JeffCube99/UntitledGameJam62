@@ -153,9 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
+  playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
   respawnPoint: {fileID: 5492907877781521366}
   checkpointText: {fileID: 2628418076006042384}
   checkpointTextMesh: {fileID: 5162573444602453879}
+  universeIndex: 0
 --- !u!114 &8800066982202964699
 MonoBehaviour:
   m_ObjectHideFlags: 0

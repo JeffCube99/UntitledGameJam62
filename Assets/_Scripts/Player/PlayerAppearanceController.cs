@@ -40,6 +40,7 @@ public class PlayerAppearanceController : MonoBehaviour
 
     public void OnPlayerDeath()
     {
+        StopAllCoroutines();
         characterAnimator.SetBool("isDead", true);
         SetAnimatorMovementVariables(Vector2.zero);
         ShowDeadForm();

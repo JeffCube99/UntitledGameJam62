@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d31fa7bd7d3989459974e489d1a1930, type: 3}
-  m_Name: DesertEnemyHazard
+  m_Script: {fileID: 11500000, guid: e8f43b4a05ebe8b41b5d72cf9abb4e1e, type: 3}
+  m_Name: ManaBoltObjectPool
   m_EditorClassIdentifier: 
-  harmsPlayer: 1
-  harmsEnemy: 0
-  damage: 1
+  prefab: {fileID: 4628615999405021167, guid: bebbae4b211209545a28258fe367ee2f, type: 3}
+  maxObjects: 10

@@ -5,25 +5,28 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     [SerializeField] private GameState gameState;
+    [SerializeField] private PlayerState playerState;
     [SerializeField] private GameObject respawnPoint;
     [SerializeField] private GameObject checkpointText;
     [SerializeField] private TextMesh checkpointTextMesh;
     [SerializeField] private int universeIndex;
     private int playerInCounter;
-    private CheckpointData checkpointData;
 
-    private void Start()
+
+    private CheckpointData GenerateCheckpointData()
     {
-        checkpointData = new CheckpointData();
+        CheckpointData checkpointData = new CheckpointData();
         checkpointData.spawnPosition = respawnPoint.transform.position;
         checkpointData.universeIndex = universeIndex;
+        checkpointData.playerUniverseCrystals = playerState.universeCrystals;
+        return checkpointData;
     }
 
     public void SetCheckpoint()
     {
         if (playerInCounter >= 1)
         {
-            gameState.checkpointData = checkpointData;
+            gameState.checkpointData = GenerateCheckpointData();
             DisplayText("Progress Saved!");
         }
     }
