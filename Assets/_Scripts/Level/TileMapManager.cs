@@ -153,7 +153,18 @@ public class TileMapManager : MonoBehaviour
             {
                 foreach (GameObject gameObject in sizeToLoadGameObjects[size])
                 {
-                    gameObject.SetActive(true);
+                    ProjectileController projectileController = gameObject.GetComponent<ProjectileController>();
+                    if (projectileController != null)
+                    {
+                        if (!projectileController.isDestroyed)
+                        {
+                            gameObject.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        gameObject.SetActive(true);
+                    }
                 }
             }
             yield return new WaitForSeconds(switchDelay);

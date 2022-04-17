@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f43b4a05ebe8b41b5d72cf9abb4e1e, type: 3}
   m_Name: ManaBoltExplositonObjectPool
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  maxObjects: 0
+  prefab: {fileID: 80521507016222947, guid: 1fdb43b0f9046fc46a94725b883436f9, type: 3}
+  maxObjects: 10

@@ -5,41 +5,49 @@ using UnityEngine;
 public class EnemyAppearanceController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer enemySpriteRenderer;
+    [SerializeField] private Animator enemyAnimator;
     [SerializeField] private float timeBetweenDamageFlashes;
     [SerializeField] private float damageEffectDuration;
     [SerializeField] private Color damagedColor;
     [SerializeField] private Color regularColor;
     [SerializeField] private Color deadColor;
+    private Rigidbody2D enemyRigidbody2D;
+
+    private void Start()
+    {
+        enemyRigidbody2D = GetComponent<Rigidbody2D>();
+    }
 
     private void FixedUpdate()
     {
-        //SetAnimatorMovementVariables(Vector2 direction);
+        if (enemyRigidbody2D != null)
+            SetAnimatorMovementVariables(enemyRigidbody2D.velocity);
     }
 
-    private void SetAnimatorMovementVariables(Vector2 direction)
+    private void SetAnimatorMovementVariables(Vector2 velocity)
     {
-        //if (direction.x != lastHorizontalInput || direction.y != lastVerticalInput)
-        //{
-        //    characterAnimator.SetFloat("last_x", lastHorizontalInput);
-        //    characterAnimator.SetFloat("last_y", lastVerticalInput);
-        //}
-        //lastHorizontalInput = direction.x;
-        //lastVerticalInput = direction.y;
-        //characterAnimator.SetFloat("velocity_x", direction.x);
-        //characterAnimator.SetFloat("velocity_y", direction.y);
-        //characterAnimator.SetFloat("speed", direction.magnitude);
+        if (velocity.x < 0)
+        {
+            enemyAnimator.SetFloat("velocity_x", -1);
+        }
+        else
+        {
+            enemyAnimator.SetFloat("velocity_x", 1);
+        }
     }
 
     public void OnRespawn()
     {
+        enemySpriteRenderer.sortingOrder = 1;
         StopAllCoroutines();
         ShowRegularForm();
     }
 
     public void OnDeath()
     {
-        // characterAnimator.SetBool("isDead", true);
-        // SetAnimatorMovementVariables(Vector2.zero);
+        enemySpriteRenderer.sortingOrder = -1;
+        if (enemyAnimator != null)
+            enemyAnimator.SetBool("is_dead", true);
         StopAllCoroutines();
         ShowDeadForm();
     }
