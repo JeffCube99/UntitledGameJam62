@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1248706278390771369}
   - component: {fileID: 6367222685243585709}
   - component: {fileID: 8800066982202964699}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 7692140002642959022}
   - component: {fileID: 2950652710303471064}
   - component: {fileID: 2900486997685708866}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: InGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8037049681946824642}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}

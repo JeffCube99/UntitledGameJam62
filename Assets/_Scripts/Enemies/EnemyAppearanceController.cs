@@ -11,34 +11,33 @@ public class EnemyAppearanceController : MonoBehaviour
     [SerializeField] private Color damagedColor;
     [SerializeField] private Color regularColor;
     [SerializeField] private Color deadColor;
-    private Rigidbody2D enemyRigidbody2D;
-
-    private void Start()
-    {
-        enemyRigidbody2D = GetComponent<Rigidbody2D>();
-    }
+    private Vector2 lastPosition;
 
     private void FixedUpdate()
     {
-        if (enemyRigidbody2D != null)
-            SetAnimatorMovementVariables(enemyRigidbody2D.velocity);
+        if (enemyAnimator != null)
+        {
+            Vector2 direction = (Vector2)transform.position - lastPosition;
+            lastPosition = (Vector2)transform.position;
+            SetAnimatorMovementVariables(direction);
+        }
     }
 
-    private void SetAnimatorMovementVariables(Vector2 velocity)
+    private void SetAnimatorMovementVariables(Vector2 direction)
     {
-        if (velocity.x < 0)
+        if (direction.x < 0)
         {
-            enemyAnimator.SetFloat("velocity_x", -1);
+            enemyAnimator.SetFloat("velocity_x", 1);
         }
         else
         {
-            enemyAnimator.SetFloat("velocity_x", 1);
+            enemyAnimator.SetFloat("velocity_x", -1);
         }
     }
 
     public void OnRespawn()
     {
-        enemySpriteRenderer.sortingOrder = 1;
+        enemySpriteRenderer.sortingOrder = 0;
         StopAllCoroutines();
         ShowRegularForm();
     }
