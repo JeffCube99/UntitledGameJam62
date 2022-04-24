@@ -16,6 +16,8 @@ MonoBehaviour:
   - linkedTiles:
     - {fileID: 11400000, guid: 9bc05796d84431641af8031c011cfac6, type: 2}
     - {fileID: 11400000, guid: c7a8b9f51c2b2e44392d45b486ee690b, type: 2}
+    - {fileID: 11400000, guid: 217a2a38255d50d4f9cd210d805a524b, type: 2}
   - linkedTiles:
     - {fileID: 11400000, guid: 0b01788f2ba63f24589c1d70fc002996, type: 2}
     - {fileID: 11400000, guid: e75af767b7ef57c4b92e49e7cea4d5c0, type: 2}
+    - {fileID: 11400000, guid: 26ab636567507d946a898dff721938fa, type: 2}

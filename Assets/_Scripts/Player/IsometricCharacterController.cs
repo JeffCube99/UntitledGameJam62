@@ -43,6 +43,7 @@ public class IsometricCharacterController : MonoBehaviour
     private void MoveCharacter()
     {
         Vector3 targetVelocity = targetDirection.normalized * speed;
+        //targetVelocity = Quaternion.AngleAxis(-45, Vector3.forward) * targetVelocity;
         Vector3 dampedVelocity = Vector3.SmoothDamp(characterRigidbody2D.velocity, targetVelocity, ref acceleration, m_MovementSmoothing);
         Vector3 velocityDelta = dampedVelocity - (Vector3)characterRigidbody2D.velocity;
         characterRigidbody2D.AddForce(velocityDelta * characterRigidbody2D.mass / Time.fixedDeltaTime, ForceMode2D.Force);

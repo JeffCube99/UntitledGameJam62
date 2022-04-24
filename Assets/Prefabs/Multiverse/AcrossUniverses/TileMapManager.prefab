@@ -53,6 +53,7 @@ MonoBehaviour:
   universeRuntimeSets:
   - {fileID: 11400000, guid: 74e9b131b42656849aa2ae358b4072c0, type: 2}
   - {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
+  - {fileID: 11400000, guid: f1cd6661dbb2375468515edbba8b6e04, type: 2}
   multiverseTileLinker: {fileID: 11400000, guid: 66aa63ede0beb9f42a762066712c3c75, type: 2}
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
 --- !u!114 &6616618035472516575

@@ -57,29 +57,29 @@ public class RebindInputMenuController : MonoBehaviour
 
 }
 
-[CustomEditor(typeof(RebindInputMenuController))]
-public class customRebindInputMenuControllerInspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        RebindInputMenuController rebindInputMenu = (RebindInputMenuController)target;
-        // Because we use this script in a prefab we need to make sure changes made by this custom 
-        // editor apply to the prefab instance.
-        PrefabUtility.RecordPrefabInstancePropertyModifications(rebindInputMenu);
-        if (rebindInputMenu.inputActionReference != null)
-        {
-            InputAction action = rebindInputMenu.inputActionReference.action;
-            List<string> bindingNames = new List<string>();
-            foreach (InputBinding binding in action.bindings)
-            {
-                bindingNames.Add(binding.path);
-            }
+//[CustomEditor(typeof(RebindInputMenuController))]
+//public class customRebindInputMenuControllerInspector : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        DrawDefaultInspector();
+//        RebindInputMenuController rebindInputMenu = (RebindInputMenuController)target;
+//        // Because we use this script in a prefab we need to make sure changes made by this custom 
+//        // editor apply to the prefab instance.
+//        PrefabUtility.RecordPrefabInstancePropertyModifications(rebindInputMenu);
+//        if (rebindInputMenu.inputActionReference != null)
+//        {
+//            InputAction action = rebindInputMenu.inputActionReference.action;
+//            List<string> bindingNames = new List<string>();
+//            foreach (InputBinding binding in action.bindings)
+//            {
+//                bindingNames.Add(binding.path);
+//            }
 
-            int index = rebindInputMenu.bindingIndex;
-            string[] bindingOptions = bindingNames.ToArray();
-            index = EditorGUILayout.Popup("Binding", index, bindingOptions);
-            rebindInputMenu.bindingIndex = index;
-        }
-    }
-}
+//            int index = rebindInputMenu.bindingIndex;
+//            string[] bindingOptions = bindingNames.ToArray();
+//            index = EditorGUILayout.Popup("Binding", index, bindingOptions);
+//            rebindInputMenu.bindingIndex = index;
+//        }
+//    }
+//}

@@ -11,7 +11,14 @@ public class EnemyAppearanceController : MonoBehaviour
     [SerializeField] private Color damagedColor;
     [SerializeField] private Color regularColor;
     [SerializeField] private Color deadColor;
+    [SerializeField] private AudioSource walkAudioSource;
     private Vector2 lastPosition;
+
+    private void Start()
+    {
+        if (enemyAnimator != null)
+            enemyAnimator.keepAnimatorControllerStateOnDisable = true;
+    }
 
     private void FixedUpdate()
     {
@@ -27,11 +34,11 @@ public class EnemyAppearanceController : MonoBehaviour
     {
         if (direction.x < 0)
         {
-            enemyAnimator.SetFloat("velocity_x", 1);
+            enemyAnimator.SetFloat("velocity_x", -1);
         }
         else
         {
-            enemyAnimator.SetFloat("velocity_x", -1);
+            enemyAnimator.SetFloat("velocity_x", 1);
         }
     }
 
@@ -40,10 +47,16 @@ public class EnemyAppearanceController : MonoBehaviour
         enemySpriteRenderer.sortingOrder = 0;
         StopAllCoroutines();
         ShowRegularForm();
+        if (enemyAnimator != null)
+            enemyAnimator.SetBool("is_dead", false);
+        if (walkAudioSource != null && !walkAudioSource.isPlaying)
+            walkAudioSource.Play();
     }
 
     public void OnDeath()
     {
+        if (walkAudioSource != null && walkAudioSource.isPlaying)
+            walkAudioSource.Stop();
         enemySpriteRenderer.sortingOrder = -1;
         if (enemyAnimator != null)
             enemyAnimator.SetBool("is_dead", true);

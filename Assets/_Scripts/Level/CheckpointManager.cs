@@ -15,6 +15,11 @@ public class CheckpointManager : MonoBehaviour
     private int playerInCounter;
     public UnityEvent OnProgressSaved;
 
+    private void Start()
+    {
+        checkpointText.SetActive(false);
+    }
+
 
     private CheckpointData GenerateCheckpointData()
     {
@@ -22,6 +27,7 @@ public class CheckpointManager : MonoBehaviour
         checkpointData.spawnPosition = respawnPoint.transform.position;
         checkpointData.universeIndex = universeIndex;
         checkpointData.playerUniverseCrystals = playerState.universeCrystals;
+        checkpointData.hasWeapon = playerState.hasWeapon;
         return checkpointData;
     }
 

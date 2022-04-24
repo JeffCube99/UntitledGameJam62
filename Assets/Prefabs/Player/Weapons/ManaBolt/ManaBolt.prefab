@@ -124,8 +124,10 @@ MonoBehaviour:
   universeRuntimeSets:
   - {fileID: 11400000, guid: 74e9b131b42656849aa2ae358b4072c0, type: 2}
   - {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
+  - {fileID: 11400000, guid: f1cd6661dbb2375468515edbba8b6e04, type: 2}
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
   onDestroyParticlesObjectPool: {fileID: 11400000, guid: 8e87837f7b82c2644bbf8fc90c8bfef9, type: 2}
+  isDestroyed: 0
 --- !u!50 &-1752500988423071928
 Rigidbody2D:
   serializedVersion: 4

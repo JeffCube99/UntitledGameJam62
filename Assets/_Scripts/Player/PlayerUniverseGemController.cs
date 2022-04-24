@@ -13,6 +13,7 @@ public class PlayerUniverseGemController : MonoBehaviour
 
 
     public UnityEvent OnUniverseTravelBegin;
+    public UnityEvent OnUniverseTravelFail;
     public UnityEvent<int> OnUniverseTravelSuccess;
 
     private bool CanTravelToUniverse(int universeIndex)
@@ -47,7 +48,12 @@ public class PlayerUniverseGemController : MonoBehaviour
 
     public void CancelUniverseTravel()
     {
-        StopAllCoroutines();
+        if (playerState.isTraveling)
+        {
+            OnUniverseTravelFail.Invoke();
+            StopAllCoroutines();
+            playerState.isTraveling = false;
+        }
     }
 
 

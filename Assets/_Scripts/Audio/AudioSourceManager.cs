@@ -58,6 +58,7 @@ public class AudioSourceManager : ScriptableObject
         for (int i = 0; i < maxAudioSources2D; i++)
         {
             AudioSource source = audioListenerGameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+            source.playOnAwake = false;
             audioSources2D.Enqueue(source);
         }
     }

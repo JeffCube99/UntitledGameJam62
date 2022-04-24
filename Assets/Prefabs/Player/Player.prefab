@@ -321,6 +321,9 @@ GameObject:
   - component: {fileID: 2022846885445442345}
   - component: {fileID: 9184739323946836766}
   - component: {fileID: 7044245194663375312}
+  - component: {fileID: 8986066059589129631}
+  - component: {fileID: 726624031770370639}
+  - component: {fileID: 1530686424459453876}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -447,8 +450,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0033736825, y: 0.18244797}
-  m_Size: {x: 0.38599026, y: 0.38599026}
+  m_Offset: {x: -0.0057268143, y: 0.17334735}
+  m_Size: {x: 0.3131864, y: 0.3131864}
   m_Direction: 0
 --- !u!70 &5254392731147680105
 CapsuleCollider2D:
@@ -478,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340ffb7fa68a2a6479f360036ca9db45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   m_MovementSmoothing: 0.05
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
 --- !u!114 &2474454418278901899
@@ -510,10 +513,12 @@ MonoBehaviour:
   characterAnimator: {fileID: 6153485808585370678}
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
   playerSpriteRenderer: {fileID: 6153485808585370677}
+  weaponObject: {fileID: 2962742001027411738}
   timeBetweenDamageFlashes: 0.2
   damagedColor: {r: 1, g: 0, b: 0, a: 1}
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   deadColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 1}
+  walkAudioSource: {fileID: 726624031770370639}
 --- !u!114 &788225419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +533,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 6b057e3453f95d6428630a031a592077, type: 2}
   gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
+  OnPlayerPickupWeapon:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5290942010005940763}
+        m_TargetAssemblyTypeName: PlayerAppearanceController, Assembly-CSharp
+        m_MethodName: UpdateWeaponState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPlayerPickupGem:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0e5de0538dec1414188e43594daeb551, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7611904824882783574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +596,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 3c02343fd03afd24aa59dc2c8d2b6d47, type: 2}
+        m_TargetAssemblyTypeName: SoundAsset, Assembly-CSharp
+        m_MethodName: PlayAudioAtAudioListener
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnUniverseTravelFail:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: fa5b9afe2f5bad24c8a486a1af2d2c31, type: 2}
         m_TargetAssemblyTypeName: SoundAsset, Assembly-CSharp
         m_MethodName: PlayAudioAtAudioListener
         m_Mode: 1
@@ -639,6 +689,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7611904824882783574}
+        m_TargetAssemblyTypeName: PlayerUniverseGemController, Assembly-CSharp
+        m_MethodName: CancelUniverseTravel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 0fa0a3d4c516a07499243b7b1f70df37, type: 2}
+        m_TargetAssemblyTypeName: SoundAsset, Assembly-CSharp
+        m_MethodName: PlayAudioAtAudioListener
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6128632380267497856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +753,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7611904824882783574}
+        m_TargetAssemblyTypeName: PlayerUniverseGemController, Assembly-CSharp
+        m_MethodName: CancelUniverseTravel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 2eae793206268fd4998e102146afca87, type: 2}
+        m_TargetAssemblyTypeName: SoundAsset, Assembly-CSharp
+        m_MethodName: PlayAudioAtAudioListener
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3050117988980760002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,6 +808,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5290942010005940763}
         m_TargetAssemblyTypeName: PlayerAppearanceController, Assembly-CSharp
         m_MethodName: OnPlayerRespawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7044245194663375312}
+        m_TargetAssemblyTypeName: UniverseTravelSoundController, Assembly-CSharp
+        m_MethodName: OnRespawnTravel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -867,6 +977,163 @@ MonoBehaviour:
   universeTravelSoundAssets:
   - {fileID: 11400000, guid: 3dbb0860a75708c4aa5561fb54ea91c0, type: 2}
   - {fileID: 11400000, guid: dbbe46c5495573e45b0551bfc94ff61b, type: 2}
+  universeMusicSoundAssets:
+  - {fileID: 11400000, guid: 89b91d019c003d94ebe1137efbd95c54, type: 2}
+  - {fileID: 11400000, guid: b92d37cec0312a0419d7172b22952d3e, type: 2}
+  - {fileID: 11400000, guid: 471bd2fe0dc194646802b256e808f86e, type: 2}
+  gameState: {fileID: 11400000, guid: bf960e2b91535c1478af11203c52a1e6, type: 2}
+--- !u!114 &8986066059589129631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153485808585370673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fefb83fc4a1c6642b5f551f0452d2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1d6451224c79d6543bb9fb71d73f6aca, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 788225419}
+        m_TargetAssemblyTypeName: PlayerStateManager, Assembly-CSharp
+        m_MethodName: PlayerPickupWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!82 &726624031770370639
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153485808585370673}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 7776635594807739044, guid: 952ded2a5efc1064aaf9a186060d5860, type: 2}
+  m_audioClip: {fileID: 8300000, guid: cd2d3488149b9804597e99a63413f46a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1530686424459453876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153485808585370673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e1a4a04c625894e825de82acd873b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a7b13b9a5220d7f43a2c465ffef59d28, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 788225419}
+        m_TargetAssemblyTypeName: PlayerStateManager, Assembly-CSharp
+        m_MethodName: PlayerPickupGem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6538023776253186206
 GameObject:
   m_ObjectHideFlags: 0

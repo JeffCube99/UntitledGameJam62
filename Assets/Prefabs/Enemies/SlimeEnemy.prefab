@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5740092018565474289}
   - component: {fileID: 4540092105244857535}
   - component: {fileID: 6798183892624781564}
+  - component: {fileID: 7002379047098243959}
   m_Layer: 2
   m_Name: SlimeEnemy
   m_TagString: Untagged
@@ -73,6 +74,7 @@ MonoBehaviour:
   damagedColor: {r: 0.09803922, g: 1, b: 0, a: 1}
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   deadColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  walkAudioSource: {fileID: 8355553490394654430}
 --- !u!114 &3047008147182420477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,10 +87,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab722f7ab15a215459761def49198f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 6
   colliders:
   - {fileID: 5641370490801454610}
-  _health: 2
+  _health: 6
   isDead: 0
   OnDamageTaken:
     m_PersistentCalls:
@@ -263,7 +265,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 2.5
+  maxSpeed: 2
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -361,6 +363,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7002379047098243959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751125662454771563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e1a4a04c625894e825de82acd873b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 01a99de89e9590f4f833028c68b4b9dd, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5740092018565474289}
+        m_TargetAssemblyTypeName: EnemyBehaviorController, Assembly-CSharp
+        m_MethodName: PauseSeeking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5974516715220515082
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +405,7 @@ GameObject:
   - component: {fileID: 5641370490801454610}
   - component: {fileID: 5372342722574583676}
   - component: {fileID: 8601343866166414416}
+  - component: {fileID: 8355553490394654430}
   m_Layer: 2
   m_Name: SlimeSprite
   m_TagString: Enemy
@@ -508,3 +539,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyState: {fileID: 3047008147182420477}
+--- !u!82 &8355553490394654430
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974516715220515082}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 7776635594807739044, guid: 952ded2a5efc1064aaf9a186060d5860, type: 2}
+  m_audioClip: {fileID: 8300000, guid: e172ac9562900421ab9172f60e8ce81a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 3
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
