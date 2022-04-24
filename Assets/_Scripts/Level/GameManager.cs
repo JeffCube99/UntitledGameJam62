@@ -8,10 +8,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CheckpointData initialCheckpoint;
     [SerializeField] private Cinemachine.CinemachineVirtualCamera virtualCamera;
 
+    private void Awake()
+    {
+        gameState.checkpointData = initialCheckpoint;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        gameState.checkpointData = initialCheckpoint;
         gameState.gameIsPaused = false;
         gameState.respawnPlayer();
         GameObject player = GameObject.FindGameObjectWithTag("Player");

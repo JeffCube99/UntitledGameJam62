@@ -24,10 +24,14 @@ public class EnemyStateController : MonoBehaviour
 
     public bool isDead;
 
-    private void Start()
+    private void Awake()
     {
         initialPosition = gameObject.transform.position;
         initialRotation = gameObject.transform.rotation;
+    }
+
+    private void Start()
+    {
         Respawn();
     }
 

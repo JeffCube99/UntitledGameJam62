@@ -7,6 +7,11 @@ public class DialogueSignManager : MonoBehaviour
     [SerializeField] private GameObject dialogueText;
     private int playerInCounter;
 
+    private void Start()
+    {
+        dialogueText.SetActive(false);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")

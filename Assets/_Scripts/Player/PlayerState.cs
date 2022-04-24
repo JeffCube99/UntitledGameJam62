@@ -22,6 +22,7 @@ public class PlayerState : ScriptableObject
     public bool isInvincible = false;
     public bool isDead = false;
     public bool isTraveling = false;
+    public bool hasWeapon = false;
     public List<int> universeCrystals;
     
     public void TakeDamage(int damage)
@@ -29,9 +30,11 @@ public class PlayerState : ScriptableObject
         if (!isInvincible && !isDead)
         {
             health -= damage;
+            Debug.Log($"Took damage {damage} {health}");
             OnDamageTaken.Invoke();
             if (health <= 0)
             {
+                Debug.Log("Died");
                 isDead = true;
                 OnDeath.Invoke();
             }

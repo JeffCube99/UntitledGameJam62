@@ -8,12 +8,24 @@ public class EnemyBehaviorController : MonoBehaviour
     [SerializeField] private AIDestinationSetter AIDestinationSetter;
     [SerializeField] private EnemyStateController enemyState;
     private bool seekingPlayer;
+    private bool pauseSeeking;
+
+    private void OnEnable()
+    {
+        pauseSeeking = false;
+    }
+
+    public void PauseSeeking()
+    {
+        pauseSeeking = true;
+    }
 
     public void ResetSeeker()
     {
         StopAllCoroutines();
         AIDestinationSetter.target = transform;
         seekingPlayer = false;
+        pauseSeeking = false;
     }
 
     public void OnDamageTaken()
@@ -37,7 +49,7 @@ public class EnemyBehaviorController : MonoBehaviour
 
     IEnumerator SeekPlayer(GameObject playerGameObject)
     {
-        while (!HasLineOfSight(playerGameObject))
+        while (!HasLineOfSight(playerGameObject) || pauseSeeking)
         {
             yield return null;
         }
@@ -48,7 +60,6 @@ public class EnemyBehaviorController : MonoBehaviour
     {
         Vector2 direction = (Vector2)(otherGameObject.transform.position - transform.position);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized);
-        Debug.Log($"RaycastAtPlayer {hit.collider}");
         if (hit.collider != null)
         {
             if (hit.collider.CompareTag("Player"))

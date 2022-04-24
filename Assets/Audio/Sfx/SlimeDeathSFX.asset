@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7524b5f7dddb2b42bff6ed14458fefe, type: 3}
   m_Name: SlimeDeathSFX
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 733f569cf57204fbd9b722ec8649193e, type: 3}
+  audioClip: {fileID: 8300000, guid: 0730fc5be8cfe42c4a97f48bec4bf25a, type: 3}
   volume: 1
   audioMixerGroup: {fileID: 7776635594807739044, guid: 952ded2a5efc1064aaf9a186060d5860, type: 2}
   audioSourceManager: {fileID: 11400000, guid: ae6164aac02ad06418d3e26a975a7c6b, type: 2}

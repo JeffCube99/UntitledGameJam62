@@ -172,7 +172,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	///
 	/// [Open online documentation to see images]
 	/// </summary>
-	public PathLog logPathResults = PathLog.Normal;
+	public PathLog logPathResults = PathLog.None;
 
 	/// <summary>@}</summary>
 	#endregion
@@ -834,7 +834,7 @@ public class AstarPath : VersionedMonoBehaviour {
 			} else if (path.error) {
 				Debug.LogWarning(debug);
 			} else {
-				Debug.Log(debug);
+				//Debug.Log(debug);
 			}
 		}
 	}

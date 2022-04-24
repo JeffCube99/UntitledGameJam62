@@ -16,11 +16,13 @@ MonoBehaviour:
   universeRuntimeSets:
   - {fileID: 11400000, guid: 74e9b131b42656849aa2ae358b4072c0, type: 2}
   - {fileID: 11400000, guid: 76fdc78ff5a7ba943b40c228dd3145e8, type: 2}
+  - {fileID: 11400000, guid: f1cd6661dbb2375468515edbba8b6e04, type: 2}
   checkpointData:
-    spawnPosition: {x: 2.67, y: 1.88, z: 0}
-    universeIndex: 0
-    playerUniverseCrystals: 0000000001000000
-  currentUniverseIndex: 0
+    spawnPosition: {x: -2.95, y: -2.21, z: 0}
+    universeIndex: 2
+    playerUniverseCrystals: 
+    hasWeapon: 0
+  currentUniverseIndex: 2
   gameIsPaused: 0
   OnPlayerRespawn:
     m_PersistentCalls:
